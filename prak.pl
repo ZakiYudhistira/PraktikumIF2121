@@ -152,7 +152,53 @@ hcf(A,B,X) :-
 /*Deklarasi Fakta*/
 writeLine(0,C).
 writeLine(X,C):-
+    X > 0,
     write(C),
     X1 is X-1,
     writeLine(X1,C).
     
+writeLeft(0).
+writeLeft(NLeft):-
+    NLeft1 is NLeft - 1,
+    writeLeft(NLeft1),
+    write(NLeft1).
+
+writeRight(0).
+writeRight(NRight):-
+    NRight1 is NRight - 1,
+    write(NRight1),
+    writeRight(NRight1).
+
+writeTop(N,0,Char,C).
+writeTop(N,Co,Char,C):-
+    Co > 0,
+    Niff is (N - C) // 2,
+    writeLeft(Niff),
+    writeLine(C,Char),
+    writeRight(Niff), nl,
+
+    C2 is C - 2,
+    Co1 is Co - 1,
+    Char1 is Char + 1,
+    writeTop(N,Co1,Char1,C2).
+
+writeBot(N,0,Char,C).
+writeBot(N,Co,Char,C):-
+    Co > 0,
+    Niff is (N - C) // 2,
+    C2 is C - 2,
+    Co1 is Co - 1,
+    Char1 is Char + 1,
+
+    writeBot(N,Co1,Char1,C2),
+
+    writeLeft(Niff),
+    writeLine(C,Char),
+    writeRight(Niff), nl.
+
+
+makePattern(N):-
+    Ntop is N//2,
+    Nbot is N - Ntop,
+    writeTop(N,Ntop,0,N),
+    writeBot(N,Nbot,0,N).
