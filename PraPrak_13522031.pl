@@ -1,4 +1,6 @@
 /*Untuk PraPrak_13522031.pl*/
+/*Nama : Zaki Yudhistira Candra */
+/*NIM : 13522031*/
 
 /*Bagian 1 : Fakta, Rule, dan Query*/
 /*Deklarasi Fakta*/
