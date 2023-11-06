@@ -1,0 +1,116 @@
+/*Untuk File .txt*/
+
+Bagian 1
+ 
+/* Suami dari Margot */
+Query: menikah(X, margot), pria(X).
+    X = henri ?;
+
+/* Kakek buyut dan nenek buyut dari Daniel */
+Query: anak(daniel, _X), anak(_X, _Y), anak(_Y, Daniel).
+    Daniel = athif ? ;
+
+    Daniel = joli ?
+
+/* Paman dari orang tua Rupert */
+Query: anak(rupert, _X), keponakan(_X, Y), pria(Y).
+    Y = michael ? ;
+    Y = michael ? ;
+
+/* Orang yang memiliki lebih dari satu istri */
+Query: menikah(X, _Y), menikah(X, _Z), _Y \== _Z.
+    X = fio ? ;
+    X = fio ? ;
+
+/* Saudara tiri tertua dari Emma */
+Query:  saudaratiri(emma, Saudara), \+
+        (saudaratiri(emma, S2), usia(Saudara, Umur), usia(Saudara, Umur2), Umur < Umur2).
+
+    Saudara = daniel ? 
+
+    yes
+
+/* Orang tua yang memiliki tepat satu anak */
+Query:  anak(X, Pasangan), \+
+        (saudara(X, Y), anak(Y, Pasangan)).
+    Pasangan = dillon ? ;
+
+    Pasangan = elysia ? ;
+
+    Pasangan = jeni
+
+    yes
+
+/* Pria yang memiliki mertua berusia lebih dari 50 tahun */
+Query: mertua(X, Pria), usia(X, Usia), Usia > 50, pria(Pria).
+    Pria = henri ? ;
+
+    Pria = henri ? ;
+
+    no
+
+/* Orang yatim piatu dengan usia termuda */
+Query:  yatimpiatu(Yateam), \+
+        (yatimpiatu(X), X \== Goal, usia(Goal, Umur), usia(_X, Umur2), Umur > Umur2).
+    Yateam = fio ? ;
+    
+    no
+
+/* Orang diatas 25 tahun yang statusnya menikah dengan orang yang memiliki saudara lebih dari 1 orang */
+Query: usia(Menikah, Umur), Umur > 25, menikah(Menikah, Y), saudara(Y, Z), saudara(Y, X), X \== Z.
+
+    Menikah = fio ? ;
+
+    Menikah = fio ? ;
+
+    Menikah = fio ? ;
+
+    Menikah = fio ? ;
+
+    Menikah = fio ? ;
+
+    Menikah = fio ? ;
+
+    Menikah = fio ? ;
+
+    Menikah = fio ? ;
+
+    no
+
+/* Seluruh keturunan Athif yang memiliki tepat 2 keponakan */
+Query:  keturunan(Turunan, athif), keponakan(X, Turunan), keponakan(Y, Turunan), X \== Y, \+
+        (keponakan(Z, Turunan), Z \== X, Z \== Y).
+
+    Turunan = robert ? ;
+
+    Turunan = robert ? ;
+
+    Turunan = robert ? ;
+
+    Turunan = robert ? ;
+
+    Turunan = robert ? ;
+
+    Turunan = robert ? ;
+
+    Turunan = robert ? ;
+
+    Turunan = robert ? ;
+
+    Turunan = bagas ? ;
+
+    Turunan = bagas ? ;
+
+    Turunan = bagas ? ;
+
+    Turunan = bagas ? ;
+
+    Turunan = bagas ? ;
+
+    Turunan = bagas ? ;
+
+    Turunan = bagas ? ;
+
+    Turunan = bagas ? ;
+
+    (15 ms) no
