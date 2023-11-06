@@ -150,6 +150,8 @@ hcf(A,B,X) :-
 
 /*Nomor 5 Make Pattern*/
 /*Deklarasi Fakta*/
+
+/*Deklarasi Rules*/
 writeLine(0,C).
 writeLine(X,C):-
     X > 0,
@@ -202,3 +204,90 @@ makePattern(N):-
     Nbot is N - Ntop,
     writeTop(N,Ntop,0,N),
     writeBot(N,Nbot,0,N).
+
+/*Bagian 3 : List*/
+/*Nomor 1 List Statistic*/
+
+/*Deklarasi Rules*/
+min([Min],Min).
+min([Head|Tail],Min):-
+    min(Tail,Min1),
+    Head > Min1,
+    Min is Min1.
+
+min([Head|Tail],Min):-
+    min(Tail,Min1),
+    Head =< Min1,
+    Min is Head.
+
+max([Max],Max).
+max([Head|Tail],Max):-
+    max(Tail,Max1),
+    Head > Max1,
+    Max is Head.
+
+max([Head|Tail],Max):-
+    max(Tail,Max1),
+    Head =< Max1,
+    Max is Max1.
+
+range(List, Range):-
+    max(List,M),
+    min(List,N),
+    Range is M - N.
+
+count([],0).
+count([Head|Tail],Count):-
+    count(Tail,Count1),
+    Count is Count1 + 1.
+    
+/*Nomor 2 List Manipulation*/
+
+/*getIndeks*/
+getIndeks([Head|Tail],Content,X):-
+    Head = Content,!,X is 1.
+getIndeks([Head|Tail],Content,X):-
+    Head \= Content,
+    getIndeks(Tail,Content,X1),
+    X is X1 + 1.
+
+/*getElememt*/
+getElement([Head|Tail],1,Elmt):-
+    Elmt is Head,!.
+getElement([Head|Tail],Idx,Elmt):-
+    Idx1 is Idx - 1,
+    getElement(Tail,Idx1,Elmt).
+
+/*setElmt*/
+setElmt([Head|Tail],1,Elmt,[Elmt|Tail]) :- !.
+setElmt([Head|Tail],Idx,Elmt,List):-
+    Idx1 is Idx - 1,
+    setElmt(Tail,Idx1,Elmt,List2),
+    List = [Head|List2].
+
+swap(List, Idx1, Idx2, Output):-
+    getElement(List,Idx1,M),
+    getElement(List,Idx2,N),
+    setElmt(List,Idx1,N,Output1),
+    setElmt(Output1,Idx2,M,Output).
+
+/*sortList*/
+remove([Head|Tail],1,Tail):-!.
+remove([Head|Tail],Idx,List):-
+    Idx1 is Idx - 1,
+    remove(Tail, Idx1, List1),
+    List = [Head|List1].
+
+getIdxMin(List,Idx):-
+    min(List,X),
+    getIndeks(List,X,Idx).
+
+sortList([],Result):-
+    Result = [],!.
+
+sortList(List,Result):-
+    min(List,Min),
+    getIdxMin(List,Idx),
+    remove(List,Idx,Output),
+    sortList(Output,Result1),
+    Result = [Min|Result1].
