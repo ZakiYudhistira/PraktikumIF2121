@@ -92,3 +92,67 @@ anakbungsu(X) :- pria(X), \+ kakak(X,Y), anak(X,M).
 anakbungsu(X) :- wanita(X), \+ kakak(X,Y), anak(X,M).
 yatimpiatu(X) :- pria(X),\+anak(X,M).
 yatimpiatu(X) :- wanita(X),\+anak(X,M).
+
+/*Bagian 2 : Rekursivitas*/
+/*Nomor 1 Exponent*/
+/*Deklarasi Fakta*/
+exponent(X,0,1).
+exponent(X,1,X).
+
+/*Deklarasi Rules*/
+exponent(X,Y,Z) :- 
+    Y1 is Y-1,
+    exponent(X,Y1,Z1),
+    Z is Z1*X.
+
+/*Nomor 2 Population*/
+/*Deklarasi Fakta*/
+population(P, R, 0, _, P) :- !.
+
+/*Deklarasi Rules*/
+population(P,R,T,C,X):-
+    T mod 2 =:= 0,
+    T1 is T-1,
+    population(P,R,T1,C,X1),
+    C1 is C+T,
+    X is X1*R - C1.
+    
+population(P,R,T,C,X):-
+    T mod 2 =:= 1,
+    T1 is T-1,
+    population(P,R,T1,C,X1),
+    C1 is C+T,
+    X is X1*R + C1.
+
+/*Nomor 3 Perrin*/
+/*Deklarasi Fakta*/
+perrin(0, 3).
+perrin(1, 0).
+perrin(2, 2).
+
+/*Deklarasi Rules*/
+perrin(X,Y) :-
+    X1 is X-2,
+    X2 is X-3,
+    perrin(X1, M),
+    perrin(X2, N),
+    Y is M + N.
+
+/*Nomor 4 HCF*/
+/*Deklarasi Fakta*/
+hcf(A,0,A) :- !.
+
+/*Deklarasi Rules*/
+hcf(A,B,X) :-
+    B =\= 0,
+    X1 is A mod B,
+    hcf(B,X1,X).
+
+/*Nomor 5 Make Pattern*/
+/*Deklarasi Fakta*/
+writeLine(0,C).
+writeLine(X,C):-
+    write(C),
+    X1 is X-1,
+    writeLine(X1,C).
+    
