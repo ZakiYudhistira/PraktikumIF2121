@@ -267,11 +267,41 @@ setElmt([Head|Tail],Idx,Elmt,List):-
     setElmt(Tail,Idx1,Elmt,List2),
     List = [Head|List2].
 
+/*swap*/
 swap(List, Idx1, Idx2, Output):-
     getElement(List,Idx1,M),
     getElement(List,Idx2,N),
     setElmt(List,Idx1,N,Output1),
     setElmt(Output1,Idx2,M,Output).
+
+/*slice*/
+listLength([],0).
+listLength([Head|Tail],Count):-
+    listLength(Tail,Count1),
+    Count = Count1 + 1.
+
+slice(List,X,Y,Output):-
+    listLength(List,L),
+    X > L,
+    Output = [],!.
+
+slice(List,X,Y,Output):-
+    listLength(List,L),
+    Y > L,
+    Output = [],!.
+
+slice(List,1,0,Output):-
+    Output = [],!.
+
+slice([Head|Tail],1,Finish,Output):-
+    Finish1 is Finish - 1,
+    slice(Tail,1,Finish1,Output1),
+    Output = [Head|Output1].
+
+slice([Head|Tail],Start,Finish,Output):-
+    Start1 is Start - 1,
+    Finish1 is Finish - 1,
+    slice(Tail,Start1,Finish1,Output).
 
 /*sortList*/
 remove([Head|Tail],1,Tail):-!.

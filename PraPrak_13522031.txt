@@ -3,22 +3,22 @@
 Bagian 1
  
 /* Suami dari Margot */
-Query: menikah(X, margot), pria(X).
-    X = henri ?;
+Query: menikah(Suami, margot), pria(Suami).
+    Suami = henri ?;
 
 /* Kakek buyut dan nenek buyut dari Daniel */
-Query: anak(daniel, _X), anak(_X, _Y), anak(_Y, Daniel).
+Query: anak(daniel, X), anak(X, Y), anak(Y, Daniel).
     Daniel = athif ? ;
 
     Daniel = joli ?
 
 /* Paman dari orang tua Rupert */
-Query: anak(rupert, _X), keponakan(_X, Y), pria(Y).
+Query: anak(rupert, X), keponakan(X, Y), pria(Y).
     Y = michael ? ;
     Y = michael ? ;
 
 /* Orang yang memiliki lebih dari satu istri */
-Query: menikah(X, _Y), menikah(X, _Z), _Y \== _Z.
+Query: menikah(X, Y), menikah(X, Z), Y \== Z.
     X = fio ? ;
     X = fio ? ;
 
