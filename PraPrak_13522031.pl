@@ -84,7 +84,7 @@ saudara(X,Y) :-  anak(X,M),anak(Y,M),X\==Y.
 saudaratiri(X,Y) :- anak(X,M),anak(Y,M),menikah(M,L),menikah(M,Z),anak(X,L),anak(Y,Z),L \== Z, X\==Y.
 kakak(X,Y) :- saudara(X,Y), usia(X,L), usia(Y,P), L > P.
 keponakan(X,Y) :- saudara(M,Y), anak(X,M), Y\==M.
-mertua(X,Y) :- menikah(X,M), anak(M,Y).
+mertua(Y,X) :- menikah(X,M), anak(M,Y).
 nenek(X,Y) :- anak(X,M), anak(M,Y), wanita(Y).
 keturunan(X, Y) :- anak(X, Z), keturunan(Z, Y).
 keturunan(X, Y) :- anak(X, Y).

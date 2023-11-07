@@ -8,19 +8,33 @@ Query: menikah(Suami, margot), pria(Suami).
 
 /* Kakek buyut dan nenek buyut dari Daniel */
 Query: anak(daniel, X), anak(X, Y), anak(Y, Daniel).
-    Daniel = athif ? ;
 
-    Daniel = joli ?
+    Daniel = athif
+    X = jena
+    Y = margot ? ;
+
+    Daniel = joli
+    X = jena
+    Y = margot ? ;
 
 /* Paman dari orang tua Rupert */
 Query: anak(rupert, X), keponakan(X, Y), pria(Y).
+
+    X = jena
     Y = michael ? ;
+
+    X = jena
     Y = michael ? ;
 
 /* Orang yang memiliki lebih dari satu istri */
 Query: menikah(X, Y), menikah(X, Z), Y \== Z.
-    X = fio ? ;
-    X = fio ? ;
+    X = fio
+    Y = jena
+    Z = jeni ? ;
+
+    X = fio
+    Y = jeni
+    Z = jena ? ;
 
 /* Saudara tiri tertua dari Emma */
 Query:  saudaratiri(emma, Saudara), \+
@@ -33,84 +47,144 @@ Query:  saudaratiri(emma, Saudara), \+
 /* Orang tua yang memiliki tepat satu anak */
 Query:  anak(X, Pasangan), \+
         (saudara(X, Y), anak(Y, Pasangan)).
-    Pasangan = dillon ? ;
-
-    Pasangan = elysia ? ;
-
     Pasangan = jeni
+    X = emma ? ;
 
+    Pasangan = dillon
+    X = hanif ? ;
+
+    Pasangan = elysia
+    X = hanif
     yes
 
 /* Pria yang memiliki mertua berusia lebih dari 50 tahun */
 Query: mertua(X, Pria), usia(X, Usia), Usia > 50, pria(Pria).
-    Pria = henri ? ;
-
-    Pria = henri ? ;
+    
+    Pria = henri
+    X = athif ?
 
     no
 
 /* Orang yatim piatu dengan usia termuda */
 Query:  yatimpiatu(Yateam), \+
-        (yatimpiatu(X), X \== Goal, usia(Goal, Umur), usia(_X, Umur2), Umur > Umur2).
+        (yatimpiatu(X), X \== Yateam, usia(Yateam, Umur), usia(X, Umur2), Umur > Umur2).
     Yateam = fio ? ;
-    
-    no
 
 /* Orang diatas 25 tahun yang statusnya menikah dengan orang yang memiliki saudara lebih dari 1 orang */
 Query: usia(Menikah, Umur), Umur > 25, menikah(Menikah, Y), saudara(Y, Z), saudara(Y, X), X \== Z.
 
-    Menikah = fio ? ;
+    Menikah = fio
+    Umur = 30
+    X = bagas
+    Y = jena
+    Z = robert ? ;
 
-    Menikah = fio ? ;
+    Menikah = fio
+    Umur = 30
+    X = bagas
+    Y = jena
+    Z = robert ? ;
 
-    Menikah = fio ? ;
+    Menikah = fio
+    Umur = 30
+    X = robert
+    Y = jena
+    Z = bagas ? ;
 
-    Menikah = fio ? ;
+    Menikah = fio
+    Umur = 30
+    X = robert
+    Y = jena
+    Z = bagas ? ;
 
-    Menikah = fio ? ;
+    Menikah = fio
+    Umur = 30
+    X = bagas
+    Y = jena
+    Z = robert ? ;
 
-    Menikah = fio ? ;
+    Menikah = fio
+    Umur = 30
+    X = bagas
+    Y = jena
+    Z = robert ? ;
 
-    Menikah = fio ? ;
+    Menikah = fio
+    Umur = 30
+    X = robert
+    Y = jena
+    Z = bagas ? ;
 
-    Menikah = fio ? ;
-
-    no
+    Menikah = fio
+    Umur = 30
+    X = robert
+    Y = jena
+    Z = bagas ? ;
 
 /* Seluruh keturunan Athif yang memiliki tepat 2 keponakan */
 Query:  keturunan(Turunan, athif), keponakan(X, Turunan), keponakan(Y, Turunan), X \== Y, \+
         (keponakan(Z, Turunan), Z \== X, Z \== Y).
 
-    Turunan = robert ? ;
+    Turunan = robert
+    X = daniel
+    Y = rupert ? ;
 
-    Turunan = robert ? ;
+    Turunan = robert
+    X = daniel
+    Y = rupert ? ;
 
-    Turunan = robert ? ;
+    Turunan = robert
+    X = rupert
+    Y = daniel ? ;
 
-    Turunan = robert ? ;
+    Turunan = robert
+    X = rupert
+    Y = daniel ? ;
 
-    Turunan = robert ? ;
+    Turunan = robert
+    X = daniel
+    Y = rupert ? ;
 
-    Turunan = robert ? ;
+    Turunan = robert
+    X = daniel
+    Y = rupert ? ;
 
-    Turunan = robert ? ;
+    Turunan = robert
+    X = rupert
+    Y = daniel ? ;
 
-    Turunan = robert ? ;
+    Turunan = robert
+    X = rupert
+    Y = daniel ? ;
 
-    Turunan = bagas ? ;
+    Turunan = bagas
+    X = daniel
+    Y = rupert ? ;
 
-    Turunan = bagas ? ;
+    Turunan = bagas
+    X = daniel
+    Y = rupert ? ;
 
-    Turunan = bagas ? ;
+    Turunan = bagas
+    X = rupert
+    Y = daniel ? ;
 
-    Turunan = bagas ? ;
+    Turunan = bagas
+    X = rupert
+    Y = daniel ? ;
 
-    Turunan = bagas ? ;
+    Turunan = bagas
+    X = daniel
+    Y = rupert ? ;
 
-    Turunan = bagas ? ;
+    Turunan = bagas
+    X = daniel
+    Y = rupert ? ;
 
-    Turunan = bagas ? ;
+    Turunan = bagas
+    X = rupert
+    Y = daniel ? ;
 
-    Turunan = bagas ? ;
-
-    (15 ms) no
+    Turunan = bagas
+    X = rupert
+    Y = daniel ? ;
